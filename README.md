@@ -1,2 +1,2 @@
-# IscrizioneMostraSperimentando
-Iscrizione alla  mostra sperimentando 2022
+# IscrizioneConcorso
+Iscrizione al concorso "Sperimentando"
