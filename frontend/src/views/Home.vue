@@ -2,7 +2,7 @@
   <div class="home text-left">
     <div class="container">
         <div class="row  rounded" >
-      <h2>Elenco Prenotazioni 09:45
+      <h2>Elenco Prenotazioni 10:01
         <router-link title="Inserisci una nuova Prenotazione"
                   :to="{ name: 'prenotazione-tipovisita', params: { tipoVisita: null, scuola: null}}"
                   class="btn btn-sm btn-primary "
@@ -335,7 +335,7 @@ export default {
   },
     created() {
       this.getPrenotazioni();
-  //    this.getMovimentiPrenotazioni();
+      this.getMovimentiPrenotazioni();
       this.getTurni();
       this.getSettori();
       this.getUserName();
