@@ -335,7 +335,7 @@ export default {
   },
     created() {
       this.getPrenotazioni();
-      this.getMovimentiPrenotazioni();
+//      this.getMovimentiPrenotazioni();
       this.getTurni();
       this.getSettori();
       this.getUserName();
