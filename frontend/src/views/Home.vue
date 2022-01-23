@@ -2,7 +2,7 @@
   <div class="home text-left">
     <div class="container">
         <div class="row  rounded" >
-      <h2>Elenco Prenotazioni 10:42
+      <h2>Elenco Prenotazioni 10:48
         <router-link title="Inserisci una nuova Prenotazione"
                   :to="{ name: 'prenotazione-tipovisita', params: { tipoVisita: null, scuola: null}}"
                   class="btn btn-sm btn-primary "
@@ -107,9 +107,9 @@
 
 
    <!--    INTESTAZIONE DELLE COLONNE    
+    -->
  
   <div v-if = "getNumeroMovimentiPrenotazione(prenotazione.id) > 0 " class="row">
-    -->
 
     <div class="container border-bottom border-secondary">
         <div class="row  rounded" >
@@ -144,8 +144,8 @@
         <div class="col-md-2 ml-4 mr-1 " v-text="prenotazione.data_prenotazione"> </div>
     </div>
     </div>
-      </div>
 -->
+      </div>
 
     <!--    Fine Elenco movimenti prenotazione    -->
 
@@ -237,8 +237,8 @@ export default {
 
    async getNumeroMovimentiPrenotazione(varID) {
         var j,count;
-        count = 0;
-          this.movimentiPrenotazione = []
+         count = 0;
+         this.movimentiPrenotazione = []
 
     //  this.getTurniPrenotazione(varID)
 
