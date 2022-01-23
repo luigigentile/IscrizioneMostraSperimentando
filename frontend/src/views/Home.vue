@@ -236,6 +236,16 @@ export default {
     },
 
    async getNumeroMovimentiPrenotazione(varID) {
+     var count
+      alert(varID)
+      count = 1
+  
+          return (count)
+    
+    },
+
+
+async getNumeroMovimentiPrenotazioneOld(varID) {
         var j,count;
          count = 0;
          this.movimentiPrenotazione = []
@@ -252,6 +262,8 @@ export default {
           return (count)
     
     },
+
+
 
    
 
