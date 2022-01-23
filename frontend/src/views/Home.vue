@@ -106,7 +106,7 @@
  <!-- AGGIUNGE I MOVIMENTI DELLA PRENOTAZIONE -->
 
 
-   <!--    INTESTAZIONE DELLE COLONNE   
+   <!--    INTESTAZIONE DELLE COLONNE    -->
  
   <div v-if = "getNumeroMovimentiPrenotazione(prenotazione.id) > 0 " class="row">
     <div class="container border-bottom border-secondary">
@@ -118,7 +118,7 @@
           <div class="col-md-2 text-right ">N.ro Alunni  </div>
         </div>
     </div>
-   -->
+  
 
 <!--    Elenco movimenti prenotazione   
     <div class="container border-bottom" v-for="(turnoPrenotazione,index) in movimentiPrenotazione"   :key="index">
