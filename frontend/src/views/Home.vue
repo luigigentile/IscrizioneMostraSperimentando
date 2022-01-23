@@ -252,13 +252,17 @@ export default {
     
     },
 
-    getMovimentiPrenotazioni() {
+   
+
+  async getMovimentiPrenotazioni() {
       let endpoint = `/api/movimentiPrenotazioni/`;
       this.movimentiPrenotazioni = [];
       apiService(endpoint).then(data => {
         this.movimentiPrenotazioni.push(...data.results);
       });
     },
+
+
 
    getDescrizioneOrarioTurno(varIdTurno) {
         var j,descrizioneOrarioTurno;
@@ -335,7 +339,7 @@ export default {
   },
     created() {
       this.getPrenotazioni();
-//      this.getMovimentiPrenotazioni();
+      this.getMovimentiPrenotazioni();
       this.getTurni();
       this.getSettori();
       this.getUserName();
