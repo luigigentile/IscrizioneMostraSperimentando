@@ -235,12 +235,12 @@ export default {
       });
     },
 
-   async getNumeroMovimentiPrenotazione(varID) {
+   getNumeroMovimentiPrenotazione(varID) {
      var count
       alert(varID)
       count = 1
   
-          return (count)
+       return (count)
     
     },
 
