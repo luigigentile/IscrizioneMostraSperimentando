@@ -2,7 +2,7 @@
   <div class="home text-left">
     <div class="container">
         <div class="row  rounded" >
-      <h2>Elenco Prenotazioni 10:48
+      <h2>Elenco Prenotazioni modificato
         <router-link title="Inserisci una nuova Prenotazione"
                   :to="{ name: 'prenotazione-tipovisita', params: { tipoVisita: null, scuola: null}}"
                   class="btn btn-sm btn-primary "
@@ -13,7 +13,7 @@
                 </span>
         </router-link>
            <!--   Pulsante PAGAMENTI -->
-         
+        
                 <a class="btn btn-outline-dark btn-sm ml-5"  @click="visualizzaPagamenti"> 
                   Pagamenti
                 </a>
@@ -25,46 +25,58 @@
       <div v-for="prenotazione in prenotazioni" :key="prenotazione.pk">
         <div class="card  border-primary rounded ">
           <div class="card-header">
-
-            <router-link  v-if="prenotazione.scuola || staff " title="Visualizza dettagli Prenotazione"
-              :to="{ name: 'prenotazione', params: {pk: prenotazione.id , prenotazione:prenotazione} }"
-              class="prenotazione-link"
-            >
-            Data Prenotazione {{ prenotazione.data_prenotazione }}
-          </router-link>
-          <span v-else>Data Prenotazione {{ prenotazione.data_prenotazione }} </span>
-
-  <!--    icona delete      -->
-              <router-link title="Elimina  Prenotazione"
-                          :to="{ name: 'prenotazione-delete', params: {prenotazione:prenotazione} }"
-                          ><span ml-2>
-                              <svg width="14" height="14" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
-                                <path fill="#dd4646" d="M1490 1322q0 40-28 68l-136 136q-28 28-68 28t-68-28l-294-294-294 294q-28 28-68 28t-68-28l-136-136q-28-28-28-68t28-68l294-294-294-294q-28-28-28-68t28-68l136-136q28-28 68-28t68 28l294 294 294-294q28-28 68-28t68 28l136 136q28 28 28 68t-28 68l-294 294 294 294q28 28 28 68z"/>
-                            </svg>
-                            </span>
-                </router-link>
-    <!--    icona change     -->
-            <router-link
-                :to="{ name: 'prenotazione-editor', params: { pk: prenotazione.id, prenotazione:prenotazione} }"
-                class="prenotazione-editor-link ml-2"
-                title = "Modifica Prenotazione"
-                > <svg width="13" height="13" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
-                  <path fill="#efb80b" d="M491 1536l91-91-235-235-91 91v107h128v128h107zm523-928q0-22-22-22-10 0-17 7l-542 542q-7 7-7 17 0 22 22 22 10 0 17-7l542-542q7-7 7-17zm-54-192l416 416-832 832h-416v-416zm683 96q0 53-37 90l-166 166-416-416 166-165q36-38 90-38 53 0 91 38l235 234q37 39 37 91z"/>
-                </svg>
+     <!--
+              <router-link  v-if=" prenotazione.scuola || staff " title="Visualizza dettagli Prenotazione"
+                :to="{ name: 'prenotazione', params: {pk: prenotazione.id , prenotazione:prenotazione} }"
+                class="prenotazione-link"
+              >
+              Data Prenotazione {{ prenotazione.data_prenotazione }}
             </router-link>
+        
+            <span v-else>Data Prenotazione {{ prenotazione.data_prenotazione }} </span>
+      -->
+         <p class="mb-0"> Data Prenotazione {{ prenotazione.data_prenotazione }}   
+        <!--    icona delete      -->
+            <span>
+                  <router-link title="Elimina  Prenotazione"
+                              :to="{ name: 'prenotazione-delete', params: {prenotazione:prenotazione} }"
+                              ><span ml-2>
+                                  <svg width="14" height="14" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill="#dd4646" d="M1490 1322q0 40-28 68l-136 136q-28 28-68 28t-68-28l-294-294-294 294q-28 28-68 28t-68-28l-136-136q-28-28-28-68t28-68l294-294-294-294q-28-28-28-68t28-68l136-136q28-28 68-28t68 28l294 294 294-294q28-28 68-28t68 28l136 136q28 28 28 68t-28 68l-294 294 294 294q28 28 28 68z"/>
+                                </svg>
+                                </span>
+                    </router-link>
+        <!--    icona change     -->
+                <router-link
+                    :to="{ name: 'prenotazione-editor', params: { pk: prenotazione.id, prenotazione:prenotazione} }"
+                    class="prenotazione-editor-link ml-2"
+                    title = "Modifica Prenotazione"
+                    > <svg width="13" height="13" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+                      <path fill="#efb80b" d="M491 1536l91-91-235-235-91 91v107h128v128h107zm523-928q0-22-22-22-10 0-17 7l-542 542q-7 7-7 17 0 22 22 22 10 0 17-7l542-542q7-7 7-17zm-54-192l416 416-832 832h-416v-416zm683 96q0 53-37 90l-166 166-416-416 166-165q36-38 90-38 53 0 91 38l235 234q37 39 37 91z"/>
+                    </svg>
+                </router-link>
+              </span>
+          </p>
 
             <p class="mb-0">
-              Prenotazione Effettuata da :
+               Prenotazione Effettuata da :
               <strong class="author-name">{{ prenotazione.user }} {{ prenotazione.id }}</strong>
             </p>
-            <div v-if="prenotazione.scuola" class="">
-              Scuola/Gruppo : <strong class="author-name">   {{ prenotazione.nome_scuola }}</strong>
 
-            </div>
-            <div class="mb-n3">
-               <p> Status : <strong class="author-name">   {{ prenotazione.labelStatus }}</strong>
+            <p class="mb-0">
+               Tipo Visita :
+              <strong class="author-name">{{ getDescrizioneTipoVisita(prenotazione.tipoVisita) }}</strong>
             </p>
-              </div>
+
+
+            <div v-if="prenotazione.scuola" class="">
+                Scuola/Gruppo : <strong class="author-name">   {{ prenotazione.nome_scuola }}</strong>
+            </div>
+         
+            <div class="mb-n3">
+               <p> Status  : <strong class="author-name">   {{ prenotazione.labelStatus }}</strong>
+              </p>
+            </div>
 
           </div>
           <div class="card-body mt-n3">
@@ -107,9 +119,11 @@
 
 
    <!--    INTESTAZIONE DELLE COLONNE    
+  <div v-if = "getNumeroMovimentiPrenotazione(prenotazione.id) > 0 " class="row">
     -->
  
-  <div v-if = "getNumeroMovimentiPrenotazione(prenotazione.id) > 0 " class="row">
+      <div v-if = "getMovimentiPrenotazione(prenotazione.id) > 0 " class="row">
+
 
     <div class="container border-bottom border-secondary">
         <div class="row  rounded" >
@@ -121,9 +135,9 @@
         </div>
     </div>
 
-<!--    Elenco movimenti prenotazione   
     <div class="container border-bottom" v-for="(turnoPrenotazione,index) in movimentiPrenotazione"   :key="index">
         <div class="row">
+<!--    Elenco movimenti prenotazione   
  -->
 
    <!-- 
@@ -141,10 +155,10 @@
          <div class="col-md-3 " v-text="turnoPrenotazione.settore"> </div>
         <div class="col-md-2 " v-text="turnoPrenotazione.classe"> </div>
         <div class="col-md-2 text-right" v-text="turnoPrenotazione.numero_alunni"> </div>
-        <div class="col-md-2 ml-4 mr-1 " v-text="prenotazione.data_prenotazione"> </div>
-    </div>
-    </div>
 -->
+     <div class="col-md-2 ml-4 mr-1 " v-text="prenotazione.data_prenotazione"> </div>
+    </div>
+    </div>
       </div>
 
     <!--    Fine Elenco movimenti prenotazione    -->
@@ -227,18 +241,19 @@ export default {
 
  // AGGIUNTE DEL 05-01-2022  
 
-  getMovimentiPrenotazione(varID) {
+  async getMovimentiPrenotazione(varID) {
       let endpoint = `/api/prenotazione/${varID}/movimenti/`;
       this.movimentiPrenotazione = []
       apiService(endpoint).then(data => {
         this.movimentiPrenotazione.push(...data.results);
-      });
+       });
+      return 1
     },
 
    getNumeroMovimentiPrenotazione(varID) {
      var count
-      alert(varID)
-      count = 1
+     alert(varID)
+       count = 1
   
        return (count)
     
@@ -247,7 +262,7 @@ export default {
 
 async getNumeroMovimentiPrenotazioneOld(varID) {
         var j,count;
-         count = 0;
+         count = 0; 
          this.movimentiPrenotazione = []
 
     //  this.getTurniPrenotazione(varID)
@@ -331,9 +346,11 @@ async getNumeroMovimentiPrenotazioneOld(varID) {
 
    
    visualizzaPagamenti() {
-          var linkpage = "https://sperimentandoaps.wordpress.com/pagamenti-mostra-20-21/"
+          var linkpage = "https://sperimentandoaps.wordpress.com/pagamenti-mostra-2022/"
           window.open(linkpage,"");
     },
+
+
 
 
    getUserName() {
@@ -345,6 +362,15 @@ async getNumeroMovimentiPrenotazioneOld(varID) {
               })
         },
 
+      getDescrizioneTipoVisita(tipoVisita) {
+        if (tipoVisita == "PR") {
+          return "Presenza"
+        }
+        else {
+          return "Virtuale"
+        }
+         },
+
     getNumeroPrenotati() {
         return 100
 
@@ -353,6 +379,7 @@ async getNumeroMovimentiPrenotazioneOld(varID) {
     created() {
       this.getPrenotazioni();
       this.getMovimentiPrenotazioni();
+  //    this.getMovimentiPrenotazione(167)
       this.getTurni();
       this.getSettori();
       this.getUserName();
