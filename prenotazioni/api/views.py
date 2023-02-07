@@ -124,10 +124,11 @@ class DistinctDataTurni(generics.ListAPIView):
 
     def get_queryset(self):
         from django.db.models import Count
+        from datetime import datetime
 #        query_set = TabellaTurni.objects.annotate(Count('data'))
 #        query_set = TabellaTurni.objects.values('data').annotate(name_count=Count('data')).filter(name_count=3)
         query_set = TabellaTurni.objects.values('data').order_by('data').annotate(name_count=Count('data'))
-        return query_set
+        return query_set.filter(data__gte = datetime.now())
 
 class DistinctDataPrenotazione(generics.ListAPIView):
     serializer_class =  DataPrenotazioniSerializer
