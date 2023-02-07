@@ -30,11 +30,11 @@ class PrenotazioneSerializer(serializers.ModelSerializer):
         model = Prenotazione
         fields = ['id','user','created_at','data_prenotazione','ora_prenotazione','scuola','pagato','status','nome_scuola','numero_accompagnatori','numero_totale_alunni','esigenze',
         'argomentiPreferiti','tipoVisita','mailInformativaInviata','mailConfermaInviata','labelStatus']
-        
+
 #        fields = '__all__'
 
     #def aaa(self, instance):
-   
+
 #        return instance.created_at.strftime('%d %B %Y')
 
 
@@ -48,7 +48,7 @@ class DataPrenotazioniSerializer(serializers.ModelSerializer):
 
 class TurniSerializer(serializers.ModelSerializer):
 #  la Riga sottostante va commentata quando si lancia la procedura di importazione dei turni
-#    settore = serializers.StringRelatedField(read_only=True)
+    settore = serializers.StringRelatedField(read_only=True)
 
 #    settore = serializers.StringRelatedField()
     data = serializers.DateField(format="%d-%m-%Y", input_formats=['%d-%m-%Y', 'iso-8601'])
