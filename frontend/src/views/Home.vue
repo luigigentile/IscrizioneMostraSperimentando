@@ -2,7 +2,7 @@
   <div class="home text-left">
     <div class="container">
         <div class="row  rounded" >
-      <h2>Elenco Prenotazioni modificato
+      <h2>Elenco Prenotazioni
         <router-link title="Inserisci una nuova Prenotazione"
                   :to="{ name: 'prenotazione-tipovisita', params: { tipoVisita: null, scuola: null}}"
                   class="btn btn-sm btn-primary "
@@ -12,15 +12,28 @@
                       </svg>
                 </span>
         </router-link>
-           <!--   Pulsante PAGAMENTI -->
-        
-                <a class="btn btn-outline-dark btn-sm ml-5"  @click="visualizzaPagamenti"> 
+    
+        <!--   Pulsante PAGAMENTI 
+                  <a class="btn btn-outline-dark btn-sm ml-5"  @click="visualizzaPagamenti"> 
                   Pagamenti
                 </a>
-        </h2>
+          -->
+      
+      
+            <!--   Pulsante PAGAMENTI -->
+            <a  title="Visualizza i Pagamenti" style='margin-left:8.0cm'>
+            <router-link :to="{ name: 'Pagamenti' }"  class="btn btn-outline-dark btn-sm ml-5"
+              >Pagamenti
+            </router-link>
+          </a>
+
+
+      
+      
+              </h2>
           </div>
            
-
+ <!-- Elenco Prenotazioni -->
          <!-- AGGIUNGE LE PRENOTAZIONI DELL'UTENTE USER -->
       <div v-for="prenotazione in prenotazioni" :key="prenotazione.pk">
         <div class="card  border-primary rounded ">
@@ -60,7 +73,7 @@
 
             <p class="mb-0">
                Prenotazione Effettuata da :
-              <strong class="author-name">{{ prenotazione.user }} {{ prenotazione.id }}</strong>
+              <strong class="author-name">{{ prenotazione.user }} </strong>
             </p>
 
             <p class="mb-0">
@@ -99,8 +112,10 @@
                 prenotazione.numero_totale_alunni
               }}</span>
             </p>
-
-            <p v-if="!prenotazione.scuola" class="mb-0">
+   <!--    modifica del 08-02-23
+             <p v-if="!prenotazione.scuola" class="mb-0">
+   -->
+            <p  class="mb-0">
               Ora prenotazione:
               <span class="ora_prenotazione">{{
                 getTimehhmm(prenotazione.ora_prenotazione)
@@ -278,8 +293,6 @@ async getNumeroMovimentiPrenotazioneOld(varID) {
     
     },
 
-
-
    
 
   async getMovimentiPrenotazioni() {
@@ -342,7 +355,6 @@ async getNumeroMovimentiPrenotazioneOld(varID) {
     
 
 //  FINE AGGIUNTE
-
 
    
    visualizzaPagamenti() {

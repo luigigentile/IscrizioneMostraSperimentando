@@ -74,11 +74,9 @@ def mailConfermaPrenotazione(request,pk):
     #print(perConoscenza)
     #print(oggetto)
     
-
     from django.core.mail import EmailMessage
     email = EmailMessage(subject=oggetto, body=contenuto, to=destinatari,bcc=perConoscenza)
     email.send()
-
   
     return HttpResponseRedirect(success_url)
 #    return render(request,"powerSimulation/simulazioneResults.html",context)
@@ -88,6 +86,8 @@ def mailInformativa(request,pk):
     import os
     prenotazione = Prenotazione.objects.get(pk=pk)
 #   print("User Id della prenotazione = " + str(prenotazione.user.id))
+    dettagliPrenotazione = MovimentiPrenotazione.objects.filter(prenotazione=prenotazione.id)
+
     user = CustomUser.objects.get(id=prenotazione.user.id)
 #    print(user.email)
 #    print(request.user.email)
@@ -102,21 +102,39 @@ def mailInformativa(request,pk):
     if(prenotazione.scuola):
         contenuto = "Gentile " + name  + ", \nGrazie per aver prenotato la visita alla Mostra Sperimentando.\n"
         contenuto = contenuto + "Attenzione: ricordati di pagare e di inviare la ricevuta del pagamento!\n"
-        contenuto = contenuto + "Tutte le informazioni per procedere al pagamento sono al seguente indirizzo:\n"
-        contenuto = contenuto + "https://sperimentandoaps.wordpress.com/pagamenti-mostra-20-21/\n"
+        contenuto = contenuto + "Tutte le informazioni per procedere al pagamento sono  nella home page dell’applicazione delle prenotazioni \n"
+        contenuto = contenuto + "http://iscrizionemostrasperimentando.herokuapp.com \n"
         contenuto = contenuto + "\nRiceverai una mail di conferma della prenotazione da info@aifpadova.it, solo quando riceveremo\n"
         contenuto = contenuto + "la ricevuta di pagamento all’indirizzo mail visitesperimentando@gmail.com.\n"
-        contenuto = contenuto + "\n Grazie, \n" 
-        contenuto = contenuto + "Lo Staff di Sperimentando" +"\n"
+        contenuto = contenuto + "\nEcco i dettagli della visita:" +"\n"
+        contenuto = contenuto + "\nUtente:               " + str(user.username) + "\n"
+        contenuto = contenuto + "Scuola/Gruppo:          " + str(prenotazione.nome_scuola) + "\n"
+        contenuto = contenuto + "N.ro accompagnatori:    " + str(prenotazione.numero_accompagnatori) + "\n"
+        contenuto = contenuto + "N.ro alunni:            " + str(prenotazione.numero_totale_alunni) + "\n"
+        contenuto = contenuto + "Data Prenotazione:      " + str(prenotazione.data_prenotazione.strftime('%d-%m-%Y')) + "\n"
+        contenuto = contenuto + "Ora Prenotazione:       " + str(prenotazione.ora_prenotazione.strftime('%H:%M')) + "\n"
 
+        contenuto = contenuto + "Dettaglio Prenotazione:" + "\n"
+        contenuto = contenuto + "Settore\t" + "Orario\t" + "Classe\t\t" +"N.ro Alunni" +"\n"
+
+        for dettaglio in dettagliPrenotazione:
+            contenuto = contenuto + str(dettaglio.turno.settore) + "\t\t"
+            contenuto = contenuto + str(dettaglio.turno.orario_turno) + "\t\t"
+            contenuto = contenuto + str(dettaglio.classe) + "\t\t"
+            contenuto = contenuto + str(dettaglio.numero_alunni)
+            contenuto = contenuto +  "\n"
+
+        contenuto = contenuto + "\nGrazie, \n" 
+        contenuto = contenuto + "Lo Staff di Sperimentando" +"\n"
+    
     if(not prenotazione.scuola):
         contenuto = "Gentile " + name  + ", \nGrazie per aver prenotato la visita alla Mostra Sperimentando.\n"
         contenuto = contenuto +  "Attenzione !!\n"
         contenuto = contenuto + "\nSe hai prenotato la visita in presenza, riceverai una mail di conferma della prenotazione da info@aifpadova.it e potrai eseguire il pagamento direttamente alla cassa.\n"
         contenuto = contenuto + "\nSe hai prenotato la visita virtuale, ti verrà inviata una mail di conferma della prenotazione da info@aifpadova.it "
         contenuto = contenuto + "solo quando riceveremo la ricevuta di pagamento all’indirizzo mail visitesperimentando@gmail.com.\n"
-        contenuto = contenuto + "Tutte le informazioni per procedere al pagamento sono al seguente indirizzo:\n"
-        contenuto = contenuto + "https://sperimentandoaps.wordpress.com/pagamenti-mostra-20-21/.\n"
+        contenuto = contenuto + "Tutte le informazioni per procedere al pagamento sono  nella home page dell’applicazione delle prenotazioni \n"
+        contenuto = contenuto + "http://iscrizionemostrasperimentando.herokuapp.com \n"
         contenuto = contenuto + "\nGrazie, \n" 
         contenuto = contenuto + "Lo Staff di Sperimentando" +"\n"
 

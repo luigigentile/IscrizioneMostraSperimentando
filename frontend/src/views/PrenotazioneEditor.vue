@@ -77,7 +77,7 @@
         <label class="ml-4" for="mailConferma">  {{ getUserEmail(prenotazione.user) }} </label><br>
         </font>
         </div>
-       
+        
 
 <!--    checkbox  Scuola    -->
         <label class="ml-3 mt-3" for="scuola"> scuola/gruppo 
@@ -107,7 +107,7 @@
 <!--    ORA PRENOTAZIONE  solo NO scuola
             <input type="time" class="col-2 " title = "Ora di prenotazione"  placeholder="hh:mm" v-model="ora_prenotazione" id="oraPrenotazione" >
 
-   -->
+    -->
        <span  v-if="!scuola && tipoVisita=='VI'">
             <label for="oraPrenotazione" class="col-2" >Ora Prenotazione</label>
             <select  id="oraPrenotazione"
@@ -125,20 +125,74 @@
                     <option value = "18:00:00"> 18:00 - Evento   </option>
                </select>
          </span>
-  
-  <span  v-if="!scuola && tipoVisita=='PR'">
-            <label for="oraPrenotazione" class="col-2" >Ora Prenotazione</label>
+  <!--    TIPO VISITA PRESENZA    Lunedi - Martedi - Giovedi  -->
+  <span  v-if="tipoVisita=='PR' && (  dayOfWeek == 0 || dayOfWeek == 1 || dayOfWeek == 3)">
+            <label for="oraPrenotazione" class="col-4" >Ora Prenotazione 
             <select  id="oraPrenotazione"
-                class="col-2" placeholder="ora prenotazione"
+                class ="ml-1"
+                placeholder="ora prenotazione"
                 v-model="ora_prenotazione">
-                    <option value = "09:00:00">  9:00-10:00    </option>
-                    <option value = "10:00:00"> 10:00-11:00    </option>
-                    <option value = "11:00:00"> 11:00-12:00    </option>
-                    <option value = "12:00:00"> 12:00-13:00    </option>
-                    <option value = "15:00:00"> 15:00-16:00    </option>
-                    <option value = "16:00:00"> 16:00-17:00    </option>
-            </select>
-         </span>
+                <option  value = "08:45:00">08:45-10:45 LMG </option>
+                <option value = "10:45:00">  10:45-12:45    </option>
+                <option value = "15:00:00">  15:00-17:00    </option>
+               </select>
+            </label>
+    </span>
+
+    <!--    TIPO VISITA PRESENZA    Mercoledi  -->
+  <span  v-if="tipoVisita=='PR' && (dayOfWeek == 2)">
+            <label for="oraPrenotazione" class="col-4" >Ora Prenotazione 
+              <select  id="oraPrenotazione"
+                class ="ml-1"
+                placeholder="ora prenotazione"
+                v-model="ora_prenotazione">
+                <option  value = "08:45:00">08:45-10:45 Me</option>
+                <option value = "10:45:00">10:45-12:45 </option>
+                <option value = "14:00:00">14:00-17:00 </option>
+               </select>
+            </label>
+    </span>
+
+     <!--    TIPO VISITA PRESENZA    Venerdi  -->
+  <span  v-if="tipoVisita=='PR' && (dayOfWeek == 4 )">
+            <label for="oraPrenotazione" class="col-4" >Ora Prenotazione 
+                <select  id="oraPrenotazione"
+                class ="ml-1"
+                placeholder="ora prenotazione"
+                v-model="ora_prenotazione">
+                <option  value = "08:45:00"> 08:45-10:45 Ve</option>
+                <option value = "10:45:00">  10:45-12:45    </option>
+                <option value = "15:00:00">  15:00-18:00    </option>
+               </select>
+            </label>
+    </span>
+
+       <!--    TIPO VISITA PRESENZA    Sabato  -->
+  <span  v-if="tipoVisita=='PR' && (dayOfWeek == 5 )">
+         <label for="oraPrenotazione" class="col-4" >Ora Prenotazione 
+            <select  id="oraPrenotazione"
+                class ="ml-1"
+                placeholder="ora prenotazione"
+                v-model="ora_prenotazione">
+                <option  value = " 8:45:00"> 8:45-12:45  SA </option>
+                 <option value = "15:00:00">15:00-18:00    </option>
+               </select>
+          </label>
+    </span>
+
+       <!--    TIPO VISITA PRESENZA    Domenica  -->
+       <span  v-if="tipoVisita=='PR' && (dayOfWeek == 6 )">
+        <label for="oraPrenotazione" class="col-4" >Ora Prenotazione
+            <select  id="oraPrenotazione"
+                class="ml-1"
+                placeholder="ora prenotazione"
+                v-model="ora_prenotazione">
+                <option  value = "10:00:00">10:00-13:00 DO </option>
+                <option value = "15:00:00">  15:00-17:00 </option>
+                <option value = "17:00:00">  17:00-19:00 </option>
+               </select>
+        </label>
+    </span>
 
 
 
@@ -184,23 +238,17 @@
                     <input type="text" title = "Inserire qui eventuali esigenze che si possono avere durante la visita" class="col-9" placeholder="esigenze" v-model="esigenze" id="esigenze" autofocus>
                     <br>
                     <br>
-                
-                
-                  <!--    BUTTOM AVANTI E TORNA INDIETRO    -->
-                  <label for="void" class="col-3" >                                 </label>
-                  <button
-                    @click="tornaIndietro"
-                    class="btn  btn-primary ">
-                    Torna indietro
-                    </button>
-
                     <button
-                    class = 'btn btn-success ml-3'
+                    class = 'btn btn-success'
                     type="submit"
                     > {{avanti}}
                     </button>
 
-                    
+                    <button
+                    @click="tornaIndietro"
+                    class="btn  btn-primary ml-3">
+                    Torna indietro
+                    </button>
 
                 </form>
                 <p class = 'muted error mt-2'> {{ error }}</p>
@@ -219,6 +267,15 @@ import { FormatToLocalDateString } from "../common/methods.js";
 export default {
     name: "PrenotazioneEditor",
     props: {
+        dayOfWeek:   {
+        type: Number,
+        required:false
+        },
+
+        orariPrenotazione:  {
+        type: Object,
+        required:false
+        },
         tipoVisitaFromTipoVisitaForm: {
         type: String,
         required:false
@@ -402,7 +459,10 @@ export default {
            },
         
         changeDataPrenotazione() {
-             if(!this.TipoVisitaInPresenza() ) {
+            let varData = new Date(this.setDateTOYYYYMMDD(this.data_prenotazione))
+            this.getScuole()
+            this.dayOfWeek = varData.getDay()
+            if(!this.TipoVisitaInPresenza() ) {
             alert("Attenzione per le norme anti Covid non puoi effettuare una visita in Presenza di Sabato o di Domenica. \n Cambia la data di prenotazione")
             document.getElementById('dataPrenotazione').focus();
             return
@@ -569,6 +629,45 @@ export default {
                 this.distinct_data_turni.push(...data.results);
             });
         },
+
+        getDayOfWeek(varStrData) {
+             let varData = new Date(this.setDateTOYYYYMMDD(varStrData))
+             this.dayOfWeek = varData.getDay()
+             return this.dayOfWeek
+        },
+
+        getOrariPrenotazione(varStrData) {
+             let varData = new Date(this.setDateTOYYYYMMDD(varStrData))
+             this.orariPrenotazione = []
+
+             switch(varData.getDay()) {
+            case 0:  // if (x === 'Lunedi')
+                this.orariPrenotazione.push('08:45', '10:45', '15:00')
+                break
+            case 1:  // if (x === 'Martedi)
+                this.orariPrenotazione.push("Martedi 8:45 - 10:45", "10:45 - 12:45", "15:00 - 1700")
+                break
+            case 2:  // if (x === 'value1')
+                this.orariPrenotazione.push("Mercoledi 8:45 - 10:45", "10:45 - 12:45", "15:00 - 17:00")
+                break
+            case 3:  // if (x === 'value1')
+                this.orariPrenotazione.push("Giovedi 8:45 - 10:45", "10:45 - 12:45", "14:00 - 17:00")
+                break
+            case 4:  // if (x === 'value1')
+                this.orariPrenotazione.push("Venerdi 8:45-10:45", "10:45-12:45", "15:00 - 18:00")
+                break
+            case 5:  // if (x === 'value1')
+                  this.orariPrenotazione.push("Sabato 8:45 - 10:45", "10:45 - 12:45", "15:00 - 18:00")
+                break
+             case 6:  // if (x === 'value1')
+                this.orariPrenotazione.push("Domenica 8:45-10:45", "10:45-12:45", "15:00-18:00")
+                break
+             }
+       
+       
+             return this.orariPrenotazione
+        },
+
 
     getLastPrenotazione() {
           //          let endpoint = `/api/prenotazioni/${this.pk}/`;
@@ -790,6 +889,8 @@ export default {
             }
 
             this.getDistinctDataTurni()
+            this.getOrariPrenotazione(this.previousData_Prenotazione)
+            this.getDayOfWeek(this.previousData_Prenotazione)
             this.getScuole()
             this.getUsers()
             this.getUserEmail()
@@ -800,7 +901,6 @@ export default {
             else {
                 this.tipoOperazione ="insert"
             }
-
         },
 
 };

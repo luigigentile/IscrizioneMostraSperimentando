@@ -67,7 +67,9 @@
     </font>
         <!--    Fine Elenco Video    -->
 
-  </div>
+ <!-- Elenco Video -->
+
+   </div>
 </template>
 
 <script>
@@ -91,6 +93,19 @@ export default {
 
 
   methods: {
+
+    openPdf () {
+      var linkpage = "./../assets/Pagamenti/"
+      window.open(linkpage,"");
+  },
+
+
+  visualizzaPagamenti() {
+              var linkpage = "./../assets/Pagamenti/"
+              window.open(linkpage,"");
+        },
+
+
     riproduciVideo(linkToVideo) {
       //alert(linkToVideo)
          window.open(linkToVideo,"mzwindows","location=0");
