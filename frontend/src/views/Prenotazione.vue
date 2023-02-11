@@ -198,7 +198,7 @@ export default {
   methods: {
  
    visualizzaOrarioVisite() {
-        var linkpage = "https://sperimentandoaps.wordpress.com/sperimentando-2022/"
+        var linkpage = "https://sperimentandoaps.wordpress.com/sperimentando-2023/"
         window.open(linkpage,"");
         },
     

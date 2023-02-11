@@ -20,12 +20,13 @@
             -->
 
 
-               <!--   Pulsante PAGAMENTI -->
+               <!--   Pulsante PAGAMENTI 
                 <div class="col-md-6 mt-2 text-right">
                     <a class="btn btn-outline-dark btn-sm" @click="visualizzaPagamenti"> 
                         Pagamenti
                     </a>
                 </div>
+                -->
 
                    <!--  telefono utente  
                 <div class="col-md-2 mt-2 text-right">
@@ -132,9 +133,9 @@
                 class ="ml-1"
                 placeholder="ora prenotazione"
                 v-model="ora_prenotazione">
-                <option  value = "08:45:00">08:45-10:45 LMG </option>
-                <option value = "10:45:00">  10:45-12:45    </option>
-                <option value = "15:00:00">  15:00-17:00    </option>
+                <option  value = "08:45:00">08:45-10:45   </option>
+                <option value = "10:45:00">10:45-12:45    </option>
+                <option value = "15:00:00">15:00-17:00    </option>
                </select>
             </label>
     </span>
@@ -146,7 +147,7 @@
                 class ="ml-1"
                 placeholder="ora prenotazione"
                 v-model="ora_prenotazione">
-                <option  value = "08:45:00">08:45-10:45 Me</option>
+                <option  value = "08:45:00">08:45-10:45</option>
                 <option value = "10:45:00">10:45-12:45 </option>
                 <option value = "14:00:00">14:00-17:00 </option>
                </select>
@@ -160,7 +161,7 @@
                 class ="ml-1"
                 placeholder="ora prenotazione"
                 v-model="ora_prenotazione">
-                <option  value = "08:45:00"> 08:45-10:45 Ve</option>
+                <option  value = "08:45:00"> 08:45-10:45 </option>
                 <option value = "10:45:00">  10:45-12:45    </option>
                 <option value = "15:00:00">  15:00-18:00    </option>
                </select>
@@ -174,7 +175,7 @@
                 class ="ml-1"
                 placeholder="ora prenotazione"
                 v-model="ora_prenotazione">
-                <option  value = " 8:45:00"> 8:45-12:45  SA </option>
+                <option  value = " 8:45:00"> 8:45-12:45   </option>
                  <option value = "15:00:00">15:00-18:00    </option>
                </select>
           </label>
@@ -187,7 +188,7 @@
                 class="ml-1"
                 placeholder="ora prenotazione"
                 v-model="ora_prenotazione">
-                <option  value = "10:00:00">10:00-13:00 DO </option>
+                <option  value = "10:00:00">10:00-13:00 </option>
                 <option value = "15:00:00">  15:00-17:00 </option>
                 <option value = "17:00:00">  17:00-19:00 </option>
                </select>
@@ -550,7 +551,7 @@ export default {
         },
 
         visualizzaMappaMostra() {
-              var linkpage = "https://sperimentandoaps.wordpress.com/mappa-sperimentando-2022/"
+              var linkpage = "https://sperimentandoaps.wordpress.com/mappa-sperimentando-2023/"
               window.open(linkpage,"");
         },
 
