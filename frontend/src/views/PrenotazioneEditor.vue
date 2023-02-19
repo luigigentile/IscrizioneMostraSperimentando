@@ -130,12 +130,13 @@
                </select>
          </span>
   <!--    TIPO VISITA PRESENZA    Lunedi - Martedi - Giovedi  -->
-  <span  v-if="tipoVisita=='PR' && (  dayOfWeek == 0 || dayOfWeek == 1 || dayOfWeek == 3)">
+  <span  v-if="tipoVisita=='PR' && (  dayOfWeek == 1 || dayOfWeek == 2 || dayOfWeek == 4)">
             <label for="oraPrenotazione" class="col-4" >Ora Prenotazione 
             <select  id="oraPrenotazione"
                 class ="ml-1"
                 placeholder="ora prenotazione"
                 v-model="ora_prenotazione">
+                <option  value = "L - M - G">Lu-Ma-Gi   </option>
                 <option  value = "08:45:00">08:45-10:45   </option>
                 <option value = "10:45:00">10:45-12:45    </option>
                 <option value = "15:00:00">15:00-17:00    </option>
@@ -144,12 +145,13 @@
     </span>
 
     <!--    TIPO VISITA PRESENZA    Mercoledi  -->
-  <span  v-if="tipoVisita=='PR' && (dayOfWeek == 2)">
+  <span  v-if="tipoVisita=='PR' && (dayOfWeek == 3)">
             <label for="oraPrenotazione" class="col-4" >Ora Prenotazione 
               <select  id="oraPrenotazione"
                 class ="ml-1"
                 placeholder="ora prenotazione"
                 v-model="ora_prenotazione">
+                <option  value = "Mer">Mer</option>
                 <option  value = "08:45:00">08:45-10:45</option>
                 <option value = "10:45:00">10:45-12:45 </option>
                 <option value = "14:00:00">14:00-17:00 </option>
@@ -158,12 +160,13 @@
     </span>
 
      <!--    TIPO VISITA PRESENZA    Venerdi  -->
-  <span  v-if="tipoVisita=='PR' && (dayOfWeek == 4 )">
+  <span  v-if="tipoVisita=='PR' && (dayOfWeek == 5 )">
             <label for="oraPrenotazione" class="col-4" >Ora Prenotazione 
                 <select  id="oraPrenotazione"
                 class ="ml-1"
                 placeholder="ora prenotazione"
                 v-model="ora_prenotazione">
+                <option  value = "Venerdi"> Venerdi </option>
                 <option  value = "08:45:00"> 08:45-10:45 </option>
                 <option value = "10:45:00">  10:45-12:45    </option>
                 <option value = "15:00:00">  15:00-18:00    </option>
@@ -172,12 +175,13 @@
     </span>
 
        <!--    TIPO VISITA PRESENZA    Sabato  -->
-  <span  v-if="tipoVisita=='PR' && (dayOfWeek == 5 )">
+  <span  v-if="tipoVisita=='PR' && (dayOfWeek == 6 )">
          <label for="oraPrenotazione" class="col-4" >Ora Prenotazione 
             <select  id="oraPrenotazione"
                 class ="ml-1"
                 placeholder="ora prenotazione"
                 v-model="ora_prenotazione">
+                <option  value = " Sabato"> Sabato   </option>
                 <option  value = " 8:45:00"> 8:45-12:45   </option>
                  <option value = "15:00:00">15:00-18:00    </option>
                </select>
@@ -185,12 +189,13 @@
     </span>
 
        <!--    TIPO VISITA PRESENZA    Domenica  -->
-       <span  v-if="tipoVisita=='PR' && (dayOfWeek == 6 )">
+       <span  v-if="tipoVisita=='PR' && (dayOfWeek == 0 )">
         <label for="oraPrenotazione" class="col-4" >Ora Prenotazione
             <select  id="oraPrenotazione"
                 class="ml-1"
                 placeholder="ora prenotazione"
                 v-model="ora_prenotazione">
+                <option  value = "Dom">Dom </option>
                 <option  value = "10:00:00">10:00-13:00 </option>
                 <option value = "15:00:00">  15:00-17:00 </option>
                 <option value = "17:00:00">  17:00-19:00 </option>
