@@ -13,11 +13,22 @@
                     </span>
                 </a>
       
-                <span   style='margin-top:6.0pt; margin-left:9.0cm'> </span> 
+                <span   style='margin-top:6.0pt; margin-left:7.0cm'> </span> 
+                 <router-link
+                    :to="{ name: 'prenotazione-editor', params: { pk: prenotazione.id, prenotazione:prenotazione} }"
+                    class="prenotazione-editor-link ml-2"
+                    title = "Torna Indietro"
+                    > <button  
+                     class="btn-sm btn-primary ml-2 mr-2"
+                    >Torna Indietro
+            </button>
+
+              </router-link>
+
              <button  
                     title="Conferma la Prenotazione"
                     @click="completaPrenotazione"
-                    class="btn-sm btn-primary ml-5 mr-4"
+                    class="btn-sm btn-primary ml-2 mr-2"
                     >Conferma Prenotazione
             </button>
 

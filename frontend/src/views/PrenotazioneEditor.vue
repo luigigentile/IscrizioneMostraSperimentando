@@ -830,16 +830,14 @@ export default {
                                                 } );
                 
                 messaggio = "Gentile utente, \ngrazie di aver prenotato una visita alla mostra  Sperimentando.  \n"
-                if (this.scuola) {
-                    messaggio = messaggio + "Completi la prenotazione inserendo i turni e i settori da visitare.\n"
-                }
+                messaggio = messaggio + "Completi la prenotazione inserendo i turni e i settori da visitare.\n"
                 messaggio = messaggio + "Nei prossimi giorni Le manderemo una mail di conferma da parte di Sperimentando \n"
                 messaggio = messaggio + "Distinti saluti,\nlo staff di Sperimentando"
                 if (!this.scuola) { 
                     alert(messaggio)
                 }
 //        SI POSIZIONE SULL'ULTIMA PRENOTAZIONE O TORNA ALLA PAGINA home
-                if (this.scuola) {
+            if (this.scuola) {
             messaggio = "Gentile utente,\n"
                 if (this.scuola) {
                     messaggio = messaggio + "Completi la prenotazione inserendo i turni e i settori da visitare.\n"
@@ -849,19 +847,11 @@ export default {
     //            messaggio = messaggio + "Nei giorni festivi è previsto un solo turno alla mattina, mentre sono previsti due turni al pomeriggio con inizio alle 15:00 e alle 17:00 \n"
 
                     alert(messaggio)
-
-
-    //                 this.$router.push({
-     //                 name: "prenotazione",
-     //                 params: {pk: this.lastPrenotazione[0].id , prenotazione:this.lastPrenotazione[0]}
-     //             })
-
-
-                    this.getLastPrenotazione()
-                }else {
-                    this.goToHome()
+                   this.getLastPrenotazione()
+                }else {                         // PRIVATI
+                    this.getLastPrenotazione()  
+//                    this.goToHome()
                 }
-//                this.vaiAMovimentiPrenotazione();
             }       // FINE INSERIMENTO PRENOTAZIONE
  //         UPDATE  PRENOTAZIONE          
           if (this.previousData_Prenotazione) {

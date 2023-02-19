@@ -31,6 +31,11 @@ def mailConfermaPrenotazione(request,pk):
     #print("User Id della prenotazione = " + str(prenotazione.user.id))
     user = CustomUser.objects.get(id=prenotazione.user.id)
     dettagliPrenotazione = MovimentiPrenotazione.objects.filter(prenotazione=prenotazione.id)
+
+    if (str(prenotazione.tipoVisita) == "PR") :
+        tipoVisita = "Presenza"
+    else:
+        tipoVisita = "Virtuale"
 #    print(request.user.email)
     success_url="/"
     destinatari = (user.email,)
@@ -45,11 +50,13 @@ def mailConfermaPrenotazione(request,pk):
     contenuto = contenuto + "La prenotazione della visita alla mostra è confermata.\n"
     contenuto = contenuto + "Ecco i dettagli della visita:\n"
     contenuto = contenuto + "Utente:                 \t" + str(user.username) + "\n"
+    contenuto = contenuto    + "Tipo Visita:             \t" + str(tipoVisita) + "\n"     
     if (prenotazione.scuola): 
         contenuto = contenuto + "Scuola/Gruppo:           \t" + str(prenotazione.nome_scuola) + "\n"
         contenuto = contenuto + "N.ro accompagnatori:    \t" + str(prenotazione.numero_accompagnatori) + "\n"
         contenuto = contenuto + "N.ro alunni:             \t" + str(prenotazione.numero_totale_alunni) + "\n"
         contenuto = contenuto + "Data Prenotazione:       \t" + str(prenotazione.data_prenotazione.strftime('%d-%m-%Y')) + "\n"
+        contenuto = contenuto + "Ora Prenotazione:       \t" + str(prenotazione.ora_prenotazione.strftime('%H:%M')) + "\n"
     else:
         contenuto = contenuto + "Data Prenotazione:       \t" + str(prenotazione.data_prenotazione.strftime('%d-%m-%Y')) + "\n"
         contenuto = contenuto + "Ora  Prenotazione        \t" + str(prenotazione.ora_prenotazione) + "\n"
@@ -57,17 +64,17 @@ def mailConfermaPrenotazione(request,pk):
     
     contenuto = contenuto + "Argomenti Preferiti:     \t" + str(prenotazione.argomentiPreferiti) + "\n"
     contenuto = contenuto + "Esigenze:                \t" + str(prenotazione.esigenze) + "\n\n"
-    contenuto = contenuto + "Lo Staff di Sperimentando" +"\n"
 #   DETTAGLI PRENOTAZIONE
     contenuto = contenuto + "Dettaglio Prenotazione:" + "\n"
-    contenuto = contenuto + "Settore\t" + "Orario\t" + "Classe\t\t" +"N.ro Alunni" +"\n"
-
+    contenuto = contenuto + "Settore\t\t\t" + "Orario\t\t" + "Classe\t\t" +"N.ro Alunni" +"\n"
     for dettaglio in dettagliPrenotazione:
         contenuto = contenuto + str(dettaglio.turno.settore) + "\t\t"
         contenuto = contenuto + str(dettaglio.turno.orario_turno) + "\t\t"
         contenuto = contenuto + str(dettaglio.classe) + "\t\t"
         contenuto = contenuto + str(dettaglio.numero_alunni)
         contenuto = contenuto +  "\n"
+    contenuto = contenuto + "Lo Staff di Sperimentando" +"\n"
+
     oggetto = "Conferma di prenotazione alla Mostra Sperimentando"
     #print(contenuto)
     #print(destinatari)
@@ -87,8 +94,12 @@ def mailInformativa(request,pk):
     prenotazione = Prenotazione.objects.get(pk=pk)
 #   print("User Id della prenotazione = " + str(prenotazione.user.id))
     dettagliPrenotazione = MovimentiPrenotazione.objects.filter(prenotazione=prenotazione.id)
-
     user = CustomUser.objects.get(id=prenotazione.user.id)
+    if (str(prenotazione.tipoVisita) == "PR") :
+        tipoVisita = "Presenza"
+    else:
+        tipoVisita = "Virtuale"
+
 #    print(user.email)
 #    print(request.user.email)
     success_url="/"
@@ -107,7 +118,8 @@ def mailInformativa(request,pk):
         contenuto = contenuto + "\nRiceverai una mail di conferma della prenotazione da info@aifpadova.it, solo quando riceveremo\n"
         contenuto = contenuto + "la ricevuta di pagamento all’indirizzo mail visitesperimentando@gmail.com.\n"
         contenuto = contenuto + "\nEcco i dettagli della visita:" +"\n"
-        contenuto = contenuto + "\nUtente:               " + str(user.username) + "\n"
+        contenuto = contenuto + "\nUtente:                " + str(user.username) + "\n"
+        contenuto = contenuto + "Tipo Visita:            " + str(tipoVisita) + "\n"       
         contenuto = contenuto + "Scuola/Gruppo:          " + str(prenotazione.nome_scuola) + "\n"
         contenuto = contenuto + "N.ro accompagnatori:    " + str(prenotazione.numero_accompagnatori) + "\n"
         contenuto = contenuto + "N.ro alunni:            " + str(prenotazione.numero_totale_alunni) + "\n"
@@ -115,11 +127,11 @@ def mailInformativa(request,pk):
         contenuto = contenuto + "Ora Prenotazione:       " + str(prenotazione.ora_prenotazione.strftime('%H:%M')) + "\n"
 
         contenuto = contenuto + "Dettaglio Prenotazione:" + "\n"
-        contenuto = contenuto + "Settore\t" + "Orario\t" + "Classe\t\t" +"N.ro Alunni" +"\n"
+        contenuto = contenuto + "Settore\t\t\t" + "Orario\t\t" + "Classe\t\t" +"N.ro Alunni" +"\n"
 
         for dettaglio in dettagliPrenotazione:
             contenuto = contenuto + str(dettaglio.turno.settore) + "\t\t"
-            contenuto = contenuto + str(dettaglio.turno.orario_turno) + "\t\t"
+            contenuto = contenuto + str(dettaglio.turno.orario_turno) + "\t"
             contenuto = contenuto + str(dettaglio.classe) + "\t\t"
             contenuto = contenuto + str(dettaglio.numero_alunni)
             contenuto = contenuto +  "\n"
@@ -129,14 +141,31 @@ def mailInformativa(request,pk):
     
     if(not prenotazione.scuola):
         contenuto = "Gentile " + name  + ", \nGrazie per aver prenotato la visita alla Mostra Sperimentando.\n"
+        contenuto = contenuto + "Tipo Visita:            " + str(tipoVisita) + "\n"     
         contenuto = contenuto +  "Attenzione !!\n"
-        contenuto = contenuto + "\nSe hai prenotato la visita in presenza, riceverai una mail di conferma della prenotazione da info@aifpadova.it e potrai eseguire il pagamento direttamente alla cassa.\n"
+        contenuto = contenuto + "\nSe hai prenotato la visita in presenza, riceverai una mail di conferma della prenotazione da info@aifpadova.it e potrai eseguire il pagamento direttamente alla cassa."
         contenuto = contenuto + "\nSe hai prenotato la visita virtuale, ti verrà inviata una mail di conferma della prenotazione da info@aifpadova.it "
         contenuto = contenuto + "solo quando riceveremo la ricevuta di pagamento all’indirizzo mail visitesperimentando@gmail.com.\n"
-        contenuto = contenuto + "Tutte le informazioni per procedere al pagamento sono  nella home page dell’applicazione delle prenotazioni \n"
+        contenuto = contenuto + "Tutte le informazioni per procedere al pagamento sono  nella home page dell’applicazione delle prenotazioni. \n"
         contenuto = contenuto + "http://iscrizionemostrasperimentando.herokuapp.com \n"
-        contenuto = contenuto + "\nGrazie, \n" 
-        contenuto = contenuto + "Lo Staff di Sperimentando" +"\n"
+ 
+
+        contenuto = contenuto + "Dettaglio Prenotazione:" + "\n"
+        contenuto = contenuto + "Settore\t\t\t" + "Orario\t\t" + "Classe\t\t" +"N.ro Alunni" +"\n"
+
+    for dettaglio in dettagliPrenotazione:
+        contenuto = contenuto + str(dettaglio.turno.settore) + "\t\t"
+        contenuto = contenuto + str(dettaglio.turno.orario_turno) + "\t"
+        contenuto = contenuto + str(dettaglio.classe) + "\t\t"
+        contenuto = contenuto + str(dettaglio.numero_alunni)
+        contenuto = contenuto +  "\n"
+
+ 
+ 
+    contenuto = contenuto + "\nGrazie, \n" 
+    contenuto = contenuto + "Lo Staff di Sperimentando" +"\n"
+
+
 
     oggetto = "Informazioni prenotazione per la visita della mostra Sperimentando"
    
