@@ -182,8 +182,9 @@
                 placeholder="ora prenotazione"
                 v-model="ora_prenotazione">
                 <option  value = " Sabato"> Sabato   </option>
-                <option  value = " 8:45:00"> 8:45-12:45   </option>
-                 <option value = "15:00:00">15:00-18:00    </option>
+                <option  value = " 8:45:00"> 8:45-10:45   </option>
+                <option  value = " 10:45:00"> 10:45-12:45   </option>
+                <option value = "15:00:00">15:00-18:00    </option>
                </select>
           </label>
     </span>
@@ -202,6 +203,25 @@
                </select>
         </label>
     </span>
+
+
+                <!--    TIPO VISITA 24 Aprile e 3 Maggio  -->
+       <span  v-if="tipoVisita=='PR' && (dayOfWeek == 7 )">
+        <label for="oraPrenotazione" class="col-4" >Ora Prenotazione
+            <select  id="oraPrenotazione"
+                class="ml-1"
+                placeholder="ora prenotazione"
+                v-model="ora_prenotazione">
+                <option  value = "24-04 03-05">24-04 03-05 </option>
+                <option  value = " 8:45:00"> 8:45-10:45   </option>
+                <option  value = " 10:45:00"> 10:45-12:45   </option>
+                      
+               </select>
+        </label>
+    </span>
+
+
+
 
             <div v-if="!scuola">
             </div>
@@ -470,8 +490,36 @@ export default {
         
         changeDataPrenotazione() {
             let varData = new Date(this.setDateTOYYYYMMDD(this.data_prenotazione))
+         //   let primoMaggio = new Date(2023,5,19)
+            let primoMaggio = "01-05-2023";
+            let treMaggio = "03-05-2023";
+            let ventiQuattroAprile = "24-04-2023";
+            let ventiCinqueAprile = "25-04-2023";
+
             this.getScuole()
-            this.dayOfWeek = varData.getDay()
+  //          alert(this.data_prenotazione)
+  //          alert(primoMaggio)
+            switch(this.data_prenotazione) {
+               case primoMaggio:  
+                    this.dayOfWeek = 0
+                    break
+                case ventiCinqueAprile:  
+                    this.dayOfWeek = 0
+                    break
+                
+                case ventiQuattroAprile: 
+                    this.dayOfWeek = 7
+                    break 
+                case treMaggio: 
+                    this.dayOfWeek = 7
+                    break 
+                default:
+                    this.dayOfWeek = varData.getDay()
+                    break
+            }
+
+
+           
             if(!this.TipoVisitaInPresenza() ) {
             alert("Attenzione per le norme anti Covid non puoi effettuare una visita in Presenza di Sabato o di Domenica. \n Cambia la data di prenotazione")
             document.getElementById('dataPrenotazione').focus();
