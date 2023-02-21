@@ -2,7 +2,7 @@
 
   <div class="about text-left ml-5">
 
-   <h4>PAGAMENTI 
+   <h4>PAGAMENTI
   
     <a href="javascript:history.go(-1)" style='margin-top:6.0pt; margin-left:16.0cm' class="btn btn-sm btn-primary "
     onMouseOver="self.status=document.referrer;return true">
@@ -91,7 +91,7 @@ alla mostra nella stessa mattinata è di almeno 7 euro a persona.</span></p>
 <p class=Didefault style='margin-top:0cm;margin-right:0cm;margin-bottom:3.0pt;
 margin-left:0cm;line-height:110%'><span style='font-family:"Arial",sans-serif'>L'erogazione
 può essere effettuata in contanti direttamente alla cassa presso la segreteria
-della mostra oppure con bonifico all'IBAN IT59P0200862770000105855060
+della mostra oppure con bonifico all'IBAN IT20P0306909606100000193024
 (intestato all'associazione SPERIMENTANDO APS), specificando "Erogazione
 liberale per mostra Sperimentando".</span></p>
 

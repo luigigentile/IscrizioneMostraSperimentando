@@ -842,15 +842,22 @@ export default {
                 if (this.scuola) {
                     messaggio = messaggio + "Completi la prenotazione inserendo i turni e i settori da visitare.\n"
                 }
-                
                 messaggio = messaggio + "Le visite in presenza sono organizzate per turni di due ore. \nNella prossima schermata potrà consultare anche gli orari delle visite"
-    //            messaggio = messaggio + "Nei giorni festivi è previsto un solo turno alla mattina, mentre sono previsti due turni al pomeriggio con inizio alle 15:00 e alle 17:00 \n"
-
+              
+                if(this.tipoVisita=="VI") {
+                    messaggio = "Gentile utente, \ngrazie di aver prenotato una visita alla mostra  Sperimentando.  \n"
+                    messaggio = messaggio + "Nei prossimi giorni Le manderemo una mail di conferma da parte di Sperimentando \n"
+                    messaggio = messaggio + "Distinti saluti,\nlo staff di Sperimentando"
                     alert(messaggio)
-                   this.getLastPrenotazione()
+                    this.goToHome()
+                }else {   
+                alert(messaggio)
+                this.getLastPrenotazione()
+                }
+                
                 }else {                         // PRIVATI
-                    this.getLastPrenotazione()  
-//                    this.goToHome()
+                this.getLastPrenotazione()  
+//              this.goToHome()
                 }
             }       // FINE INSERIMENTO PRENOTAZIONE
  //         UPDATE  PRENOTAZIONE          
