@@ -268,17 +268,19 @@
                     <input type="text" title = "Inserire qui eventuali esigenze che si possono avere durante la visita" class="col-9" placeholder="esigenze" v-model="esigenze" id="esigenze" autofocus>
                     <br>
                     <br>
-                    <button
-                    class = 'btn btn-success'
-                    type="submit"
-                    > {{avanti}}
-                    </button>
-
+                
                     <button
                     @click="tornaIndietro"
                     class="btn  btn-primary ml-3">
-                    Torna indietro
+                    Indietro
                     </button>
+
+                    <button
+                    class = 'btn btn-success ml-3'
+                    type="submit"
+                    > {{avanti}}
+                    </button>
+              
 
                 </form>
                 <p class = 'muted error mt-2'> {{ error }}</p>
@@ -830,7 +832,7 @@ export default {
                                                 } );
                 
                 messaggio = "Gentile utente, \ngrazie di aver prenotato una visita alla mostra  Sperimentando.  \n"
-                messaggio = messaggio + "Completi la prenotazione inserendo i turni e i settori da visitare.\n"
+                messaggio = messaggio + "Completi la prenotazione inserendo gli orari e i settori da visitare.\n"
                 messaggio = messaggio + "Nei prossimi giorni Le manderemo una mail di conferma da parte di Sperimentando \n"
                 messaggio = messaggio + "Distinti saluti,\nlo staff di Sperimentando"
                 if (!this.scuola) { 
@@ -840,7 +842,7 @@ export default {
             if (this.scuola) {
             messaggio = "Gentile utente,\n"
                 if (this.scuola) {
-                    messaggio = messaggio + "Completi la prenotazione inserendo i turni e i settori da visitare.\n"
+                    messaggio = messaggio + "Completi la prenotazione inserendo gli orari e i settori da visitare.\n"
                 }
                 messaggio = messaggio + "Le visite in presenza sono organizzate per turni di due ore. \nNella prossima schermata potrà consultare anche gli orari delle visite"
               

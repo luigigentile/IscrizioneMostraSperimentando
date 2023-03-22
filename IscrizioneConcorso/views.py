@@ -153,17 +153,15 @@ def mailInformativa(request,pk):
         contenuto = contenuto + "Dettaglio Prenotazione:" + "\n"
         contenuto = contenuto + "Settore\t\t\t" + "Orario\t\t" + "Classe\t\t" +"N.ro Alunni" +"\n"
 
-    for dettaglio in dettagliPrenotazione:
-        contenuto = contenuto + str(dettaglio.turno.settore) + "\t\t"
-        contenuto = contenuto + str(dettaglio.turno.orario_turno) + "\t"
-        contenuto = contenuto + str(dettaglio.classe) + "\t\t"
-        contenuto = contenuto + str(dettaglio.numero_alunni)
-        contenuto = contenuto +  "\n"
-
+        for dettaglio in dettagliPrenotazione:
+            contenuto = contenuto + str(dettaglio.turno.settore) + "\t\t"
+            contenuto = contenuto + str(dettaglio.turno.orario_turno) + "\t"
+            contenuto = contenuto + str(dettaglio.classe) + "\t\t"
+            contenuto = contenuto + str(dettaglio.numero_alunni)
+            contenuto = contenuto +  "\n"
  
- 
-    contenuto = contenuto + "\nGrazie, \n" 
-    contenuto = contenuto + "Lo Staff di Sperimentando" +"\n"
+        contenuto = contenuto + "\nGrazie, \n" 
+        contenuto = contenuto + "Lo Staff di Sperimentando" +"\n"
 
 
 
